@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  ngrok:
+    image: 'wernight/ngrok'
+    environment:
+        - NGROK_PORT=web:80
+        - NGROK_AUTH={auth_token}
+    ports:
+        - '4040'
+    links:
+        - 'web'
+  web:
+    build: app
+    ports: 
+      - '8089:80'
+    volumes:
+      - ./app:/var/www/html/
+      
